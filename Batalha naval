@@ -1,0 +1,72 @@
+#include <stdio.h>
+
+#define TAMANHO_NAVIO 3
+#define TAMANHO_TABULEIRO 10
+
+int main() {
+    char tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO];
+    int navioVertical[TAMANHO_NAVIO][2];
+    int navioHorizontal[TAMANHO_NAVIO][2];
+
+    int inicioVerticalX, inicioVerticalY;
+    int inicioHorizontalX, inicioHorizontalY;
+
+    // Inicializa o tabuleiro com água (~)
+    for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+        for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
+            tabuleiro[i][j] = '~';
+        }
+    }
+
+    //  Entrada do usuário
+    printf("Digite a posição inicial do Navio Vertical (X Y): ");
+    scanf("%d %d", &inicioVerticalX, &inicioVerticalY);
+
+    printf("Digite a posição inicial do Navio Horizontal (X Y): ");
+    scanf("%d %d", &inicioHorizontalX, &inicioHorizontalY);
+
+    // Posiciona o navio vertical
+    for (int i = 0; i < TAMANHO_NAVIO; i++) {
+        int x = inicioVerticalX;
+        int y = inicioVerticalY + i;
+        navioVertical[i][0] = x;
+        navioVertical[i][1] = y;
+        tabuleiro[y][x] = 'V';
+    }
+
+    // Posiciona o navio horizontal
+    for (int i = 0; i < TAMANHO_NAVIO; i++) {
+        int x = inicioHorizontalX + i;
+        int y = inicioHorizontalY;
+        navioHorizontal[i][0] = x;
+        navioHorizontal[i][1] = y;
+        tabuleiro[y][x] = 'H';
+    }
+
+    // Exibe coordenadas
+    printf("\n Coordenadas do Navio Vertical:\n");
+    for (int i = 0; i < TAMANHO_NAVIO; i++) {
+        printf("Parte %d: (%d, %d)\n", i + 1, navioVertical[i][0], navioVertical[i][1]);
+    }
+
+    printf("\n Coordenadas do Navio Horizontal:\n");
+    for (int i = 0; i < TAMANHO_NAVIO; i++) {
+        printf("Parte %d: (%d, %d)\n", i + 1, navioHorizontal[i][0], navioHorizontal[i][1]);
+    }
+
+    //  Exibe o tabuleiro
+    printf("\n Tabuleiro:\n   ");
+    for (int i = 0; i < TAMANHO_TABULEIRO; i++)
+        printf("%d ", i);
+    printf("\n");
+
+    for (int y = 0; y < TAMANHO_TABULEIRO; y++) {
+        printf("%2d ", y);
+        for (int x = 0; x < TAMANHO_TABULEIRO; x++) {
+            printf("%c ", tabuleiro[y][x]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
